@@ -2,11 +2,15 @@
   <header>
     <img src="https://icones.pro/wp-content/uploads/2021/04/logo-spotify-icone-original.png" alt="logo">
     <div class="custom-select" >
-  <select>
-    <option value="0">Seleziona un genere:</option>
-    <option value="1">Rock</option>
-    <option value="2">blues</option>
-    <option value="3">Pop</option>
+  <select
+    v-model="selected"
+   @change="$emit('search',selected )">
+    
+    <option  >All</option>
+    <option >Rock</option>
+    <option>Jazz</option>
+    <option >Pop</option>
+    <option >Metal</option>
   </select>
 </div>
     
@@ -16,6 +20,12 @@
 <script>
 export default {
     name:"HeaderComp",
+    data(){
+      return{
+         selected:""
+
+      }
+    }
 
 }
 </script>

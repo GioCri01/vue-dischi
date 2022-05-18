@@ -1,9 +1,10 @@
 <template>
   <main>
-      <div class="container card-container"  v-if="isLoaded">
+      <HeaderComp @search="changeOption"/>
+      <div class="container card-container "  v-if="isLoaded">
           <CardComp
          
-          v-for="(item ,index) in arrCards"
+          v-for="(item ,index) in filteredCard"
           :key="`item-${index}`"
           :cardItem="item"
           
@@ -21,6 +22,7 @@
 import axios from "axios";
 import CardComp from './CardComp.vue';
 import LoaderComp from "./LoaderComp.vue";
+import HeaderComp from "./HeaderComp.vue";
 
 export default {
     name: "MainComp",
@@ -30,10 +32,11 @@ export default {
             baseURL:"https://flynn.boolean.careers/exercises/api/array/music",
             arrCards :[],
             isLoaded : false,
+            optionValue : "",
         }
     },
 
-    components: { CardComp, LoaderComp },
+    components: { CardComp, LoaderComp,HeaderComp },
 
     mounted(){
         this.getAPI()
@@ -49,6 +52,28 @@ export default {
 
             })
 
+        },
+
+        changeOption(selected){
+            this.optionValue = selected
+            console.log(this.optionValue);
+
+        }
+
+    },
+    computed:{
+        filteredCard(){
+            let cardFiltered = []
+            if(this.optionValue === "All"){
+                cardFiltered = this.arrCards
+
+
+            }else{
+                cardFiltered = this.arrCards.filter(card =>{
+                    return card.genre.toUpperCase().includes(this.optionValue.toUpperCase())
+                })
+            }
+            return cardFiltered;
         }
     }
 }
