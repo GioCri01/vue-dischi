@@ -5,10 +5,10 @@
   <select
     v-model="selected"
    @change="$emit('search',selected )">
+    <option disabled value="" >Seleziona un genere:</option>
     
-    <option  >All</option>
     <option >Rock</option>
-    <option>Jazz</option>
+    <option>jazz</option>
     <option >Pop</option>
     <option >Metal</option>
   </select>

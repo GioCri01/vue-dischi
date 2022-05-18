@@ -64,15 +64,9 @@ export default {
     computed:{
         filteredCard(){
             let cardFiltered = []
-            if(this.optionValue === "All"){
-                cardFiltered = this.arrCards
-
-
-            }else{
-                cardFiltered = this.arrCards.filter(card =>{
+            cardFiltered = this.arrCards.filter(card =>{
                     return card.genre.toUpperCase().includes(this.optionValue.toUpperCase())
                 })
-            }
             return cardFiltered;
         }
     }
